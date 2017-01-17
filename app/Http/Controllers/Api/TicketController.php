@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Ticket;
@@ -16,7 +17,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return $request->user()->tickets;
+        return Auth::guard('api')->user()->tickets;
     }
 
     /**
@@ -34,7 +35,7 @@ class TicketController extends Controller
         ]);
 
         try {
-            $ticket = $request->user()->tickets();
+            $ticket = Auth::guard('api')->user()->tickets();
 
             $ticket->first_name = $request->first_name;
             $ticket->last_name  = $request->last_name;

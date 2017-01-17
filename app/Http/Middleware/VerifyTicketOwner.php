@@ -16,7 +16,7 @@ class VerifyTicketOwner
      */
     public function handle($request, Closure $next)
     {
-        if ($request->route()->getParameter('ticket')->user_id !== $request->user()->id) {
+        if ($request->route()->getParameter('ticket')->user_id !== Auth::guard('api')->user()->id) {
             return response()->json([
                 'message' => 'Ticket does not belong to the authenticated user'
             ], 401);
