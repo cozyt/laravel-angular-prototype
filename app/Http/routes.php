@@ -16,5 +16,12 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function () {
+    Route::get('ticket', 'TicketController@index');
+    Route::post('ticket', 'TicketController@store');
+    
+    Route::get('ticket/{ticket}', 'TicketController@redeem')
+        ->middleware(['user.ticket', 'ticket.redeemed']);
+});
