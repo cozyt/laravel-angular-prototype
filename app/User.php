@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the tickets for the user
+     */
+    public function tickets()
+    {
+        return $this->hasMany('App\Ticket');
+    }
+
 }
