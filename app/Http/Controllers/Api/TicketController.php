@@ -35,8 +35,9 @@ class TicketController extends Controller
         ]);
 
         try {
-            $ticket = Auth::guard('api')->user()->tickets();
+            $ticket = new Ticket;
 
+            $ticket->user_id    = Auth::guard('api')->user()->id;
             $ticket->first_name = $request->first_name;
             $ticket->last_name  = $request->last_name;
             $ticket->email      = $request->email;

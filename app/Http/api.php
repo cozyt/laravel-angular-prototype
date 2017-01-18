@@ -2,10 +2,14 @@
 
 Route::get('user', 'UserController@index');
 
-Route::get('ticket', 'TicketController@index');
+Route::get('ticket', [
+    'as'   => 'ticket',
+    'uses' => 'TicketController@index',
+]);
 Route::post('ticket', 'TicketController@store');
 
-Route::get('ticket/{ticket}', [
+Route::post('ticket/{ticket}', [
+    'as'         => 'ticket.redeem',
     'middleware' => ['user.ticket', 'ticket.redeemed'],
-    'uses' => 'TicketController@redeem',
+    'uses'       => 'TicketController@redeem',
 ]);
